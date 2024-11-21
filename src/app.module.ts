@@ -11,15 +11,20 @@ export class AppModule {}
 */
 import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
-import { NotificationModule } from './modules/notification/notification.module'; // Import NotificationModule
+import { AppController } from './app.controller'; // Import the AppController
+import { AppService } from './app.service';
+import { NotificationModule } from './modules/notification/notification.module';
 import { UserPreferencesModule } from './modules/user-preferences/user-preferences.module';
+
 @Module({
   imports: [
     MongooseModule.forRoot(
       'mongodb+srv://Balu:Balu123@cluster0.itvyruz.mongodb.net/<database_name>?retryWrites=true&w=majority&appName=Cluster0'
     ),
-    UserPreferencesModule, // Ensure this is imported
-    NotificationModule, // Ensure NotificationModule is imported
+    UserPreferencesModule,
+    NotificationModule,
   ],
+  controllers: [AppController],  // Add the controller here
+  providers: [AppService],
 })
 export class AppModule {}
